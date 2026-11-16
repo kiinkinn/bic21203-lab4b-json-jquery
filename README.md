@@ -28,7 +28,7 @@ Used jQuery methods such as `.text()`, `.addClass()` and `.on()` to modify webpa
 
 ## Screenshots
 
-##All screenshots are stored in the screenshots folder.
+## All screenshots are stored in the screenshots folder.
 
  **Question 1:** JSON file content.
  
