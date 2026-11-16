@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrieve Book Data</title>
+</head>
+<body>
+
+    <h2>Book Information</h2>
+
+    <div id="bookInfo">
+        <p>Loading book information...</p>
+    </div>
+
+    <script>
+        async function loadBooks() {
+            const bookInfo = document.getElementById("bookInfo");
+
+            try {
+                const response = await fetch("books.json");
+
+                if (!response.ok) {
+                    throw new Error("Unable to load books.json");
+                }
+
+                const data = await response.json();
+
+                const firstBook = data.books[0];
+                const secondBook = data.books[1];
+
+                bookInfo.textContent = "";
+
+                const title = document.createElement("p");
+                title.textContent = "First Book Title: " + firstBook.title;
+                bookInfo.appendChild(title);
+
+                const author = document.createElement("p");
+                author.textContent = "Second Book Author: " + secondBook.author;
+                bookInfo.appendChild(author);
+
+                const genresHeading = document.createElement("h3");
+                genresHeading.textContent = "Book Genres";
+                bookInfo.appendChild(genresHeading);
+
+                data.books.forEach(function(book) {
+                    const genre = document.createElement("p");
+
+                    genre.textContent =
+                        book.title + " — " + book.genres.join(", ");
+
+                    bookInfo.appendChild(genre);
+                });
+
+            } catch (error) {
+                bookInfo.textContent =
+                    "Error: Unable to retrieve book information. Please try again.";
+            }
+        }
+
+        loadBooks();
+    </script>
+
+</body>
+</html>
